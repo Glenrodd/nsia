@@ -1,0 +1,344 @@
+.pagination {
+    height: 36px;
+    margin: 18px 0;
+    
+}
+.pagination ul {
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    display: inline-block;
+    margin-bottom: 0;
+    margin-left: 0;
+}
+.pagination li {
+    display: inline;
+}
+.pagination a {
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #DDDDDD;
+    border-style: solid;
+    border-width: 1px 1px 1px 0;
+    float: left;
+    line-height: 34px;
+    padding: 0 14px;
+    text-decoration: none;
+}
+.pagination a:hover, .pagination .active a {
+    background-color: #F5F5F5;
+}
+.pagination .active a {
+    color: #999999;
+    cursor: default;
+}
+.pagination .disabled a, .pagination .disabled a:hover {
+    background-color: transparent;
+    color: #999999;
+    cursor: default;
+}
+.pagination li:first-child a {
+    border-left-width: 1px;
+    border-radius: 3px 0 0 3px;
+}
+.pagination li:last-child a {
+    border-radius: 0 3px 3px 0;
+}
+.pagination-centered {
+    text-align: center;
+}
+.pagination-right {
+    text-align: right;
+}
+
+/*###########################################################################*/
+/*CODIGO PARA ESTILOS DE LA TABLA QUE SE MUESTRA EN EL VIEW SEGUIMIENTOS */
+
+#table_cabecera_seguimiento {
+    width: 100%;
+}
+
+#table_cabecera_seguimiento tr th {
+    background-color: #086A87;
+    color: #F2F2F2;
+    /*font-size: 39px,*/
+    padding: 5px;
+    padding-left: 12px;
+
+}
+
+#table_cabecera_seguimiento tr td {
+    padding: 5px;
+}
+
+/*###########################################################################*/
+/* codigo para la tabla seguimiento*/
+#table_seguimiento {
+    /*background-color: #086A87;
+    color: #F2F2F2;*/
+    font-size: 14px;
+    width: 100%;
+}
+#table_seguimiento tr th {
+    background-color: #086A87;
+    color: #F2F2F2;
+    padding: 4px;
+    padding-left: 12px;
+    
+}
+
+#table_seguimiento tr td {
+    padding: 3px;
+    padding-left: 5px;
+}
+
+/* codigo para los mensajes personales*/
+.div_info{
+
+    border: 0 solid red;
+    padding: 17px;
+    border-radius: 10px; 
+    box-shadow: 2px 2px 2px 2px;
+    background-color: #81BEF7;
+    /*opacity:0.4;*/
+    color: #0B2F3A;
+
+}
+
+/*codigo  para cambiar el color de personal no asignado a grupos*/
+.grupoColumn{
+
+    color: red;
+    font-weight: bold;
+}
+
+/* codigo para cambiar el estilo de las vista de los documentos*/
+#viewCabecera{
+
+    font-size: 15px;
+}
+
+#viewContenido{
+    font-size: 15px;
+}
+
+/*####################################################################*/
+/* codigo para mostrar los mensajes al guardar, actualizar y eliminar info*/
+
+/* codigo pára cambiar el estilo de la caja de texto de mensaje*/
+div.info_alert{
+
+  position:absolute; 
+  z-index: 1;
+  /*height:200px;*/
+  width: 100%;
+  /*font-family: Verdana;*/
+  /*border: 1px solid red;*/
+
+}
+
+.flashes{
+  width: 70%;
+  height:200px;
+  font-size: 16px;
+  font-family: Verdana, Geneva, sans-serif;
+
+}
+#mensaje_emergente{
+  font-size:50px;
+}
+/*##################*/
+
+div.flash-error, div.flash-notice, div.flash-success, div.flash-info
+{
+    padding:.8em;
+    margin-bottom:1em;
+    border:2px solid #ddd;
+
+}
+
+div.flash-error
+{
+    background:#FBE3E4;
+    color:#8a1f11;
+    border-color:#FBC2C4;
+    border-radius: 13px;
+}
+
+div.flash-notice
+{
+    background:#FFF6BF;
+    color:#514721;
+    border-color:#FFD324;
+    border-radius: 13px;
+}
+
+div.flash-success
+{
+    background:#E6EFC2;
+    color:#264409;
+    border-color:#C6D880;
+    border-radius: 13px;
+}
+div.flash-info
+{
+    background:#F0DDC6;
+    color:#EA8E26;
+    border-color:#D37305;
+    border-radius: 13px;
+}
+
+div.flash-error a
+{
+    color:#8a1f11;
+}
+
+div.flash-notice a
+{
+    color:#514721;
+}
+
+div.flash-success a
+{
+    color:#264409;
+}
+
+div.flash-info a
+{
+    color:#EA8E26;
+}
+
+/*###############################################*/
+/* codigo para parpadear texto*/
+.text {
+  /*font-size:28px;*/
+  font-family:helvetica;
+  font-weight:bold;
+  color:darkblue;
+  text-transform:uppercase;
+}
+.parpadea {
+  
+  animation-name: parpadeo;
+  animation-duration: 4s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+
+  -webkit-animation-name:parpadeo;
+  -webkit-animation-duration: 4s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+}
+
+@-moz-keyframes parpadeo{  
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes parpadeo {  
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+   100% { opacity: 1.0; }
+}
+
+@keyframes parpadeo {  
+  0% { opacity: 1.0; }
+   50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+
+
+/*###################################################*/
+/* codigo para mostrar los mensajes de error*/
+/* codigo re-escrito */
+div.form .errorMessage{
+  color: #FA5858;
+  font-style:italic;
+  font-size: 13px;
+}
+
+
+/*########################################################*/
+/* estilos para los tooltips*/
+/*mensajes que se muestran al posicionar el mouse sobre el texto*/
+
+
+
+
+/*################################################*/
+/*estilo para  numero de copia de seguimiento*/
+.numero_copia{
+
+ text-align:right;  
+ position:relative;  
+ margin-top: -17px; 
+ font-size: 11px; 
+ font-weight: bold; 
+ border: 0px solid green;
+
+}
+
+/*################################################*/
+/*estilo para mostrar nuri*/
+
+.nuri{
+
+  background:#E8EAEC; 
+  padding:8px; 
+  border-radius: 5px;
+
+}
+
+
+
+
+/*##############################################*/
+/*CODIGO PARA MOSTRAR LA VENTANA EMERGENTE EN EL BORRADOR DRAFT */
+
+#snackbar {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 250px; /* Set a default minimum width */
+  margin-left: -125px; /* Divide value of min-width by 2 */
+  background-color: #184380; /* Black background color */
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 2px; /* Rounded borders */
+  padding: 16px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 1; /* Add a z-index if needed */
+  left: 50%; /* Center the snackbar */
+  bottom: 30px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar. 
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;} 
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;} 
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}

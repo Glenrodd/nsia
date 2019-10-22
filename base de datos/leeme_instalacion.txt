@@ -1,0 +1,110 @@
+### Debian 9 ###
+
+sudo apt-get update
+sudo apt-get install -y apt-transport-https curl
+curl https://packages.sury.org/php/apt.gpg | sudo apt-key add -
+echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php5.list
+##########################################################################################################################
+
+
+// instalar apache 
+
+ apt-get install apache2
+
+// instalar php
+
+Install PHP 5.6 on Ubuntu 16.04 / Debian 9
+Update the repository cache using the following command.
+
+sudo apt-get update
+Now, install PHP 5.6 / PHP 7.0 using the apt command.
+
+sudo apt-get install -y php5.6
+Verify the PHP version using the following command.
+
+php -v
+Output:
+
+PHP 5.6.33-1+0~20180105151408.9+stretch~1.gbp0deeda (cli) 
+Copyright (c) 1997-2016 The PHP Group
+Zend Engine v2.6.0, Copyright (c) 1998-2016 Zend Technologies
+    with Zend OPcache v7.0.6-dev, Copyright (c) 1999-2016, by Zend Technologies
+
+
+//######################################################
+
+
+Es necesario instalar o habilitar los siguientes paquetes en el servidor linux
+
+apt-get install php5-gd 
+ó
+apt-get install php-gd
+
+apt-get install php-pgsql
+
+apt-get install php-mysql
+
+// reiniciar el servidor apache
+
+sudo service apache2 restart
+
+#############################################################
+
+apt-get install php7.0-mbstring
+
+ó
+
+apt-get install php-mbstring
+
+##############################################################
+
+instalar composer en donde esta descargada la libreria html2pdf
+/siaco/protected/extensions/html2pdf/
+
+
+composer install
+
+
+###############################################################
+es necesario cambiar el duaño del sistema
+
+chown -R www-data:www-data /var/www/siaco 
+
+##############################################################
+--backup de base de  datos en texto plano
+
+pg_dump -U alvaro -d siaco -h localhost -f siaco12-10-2018.sql
+
+
+
+--restaurar base de datos
+
+psql -U alvaro -d siaco -h localhost -f siaco_24-08-2018.sql
+
+pg_restore -h localhost -p 5432 -U postgres -d "almacenes" -v "/home/siaco/01.backup"	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
