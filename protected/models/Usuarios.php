@@ -167,7 +167,7 @@ class Usuarios extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id_usuario',$this->id_usuario);
-		$criteria->compare('nombre',strtoupper($this->nombre),true);
+		$criteria->compare('nombre',$this->nombre,true);
 		$criteria->compare('cargo',strtoupper($this->cargo),true);
 		$criteria->compare('usuario',strtolower($this->usuario),true);
 		$criteria->compare('password',$this->password,true);
@@ -1108,7 +1108,7 @@ ORDER BY codigo;
 	//#######################################################################
 
 	// funcion para consultar la base de datos POSTGRESQL - SAD
-	public function getAreasSAD(){
+	/*public function getAreasSAD(){
 
 		//$connection=Yii::app()->dbsad;
 		
@@ -1117,7 +1117,7 @@ ORDER BY codigo;
 
 	    return CHtml::listData($result,'usu_id','nombres');
         
-	}
+	}*/
 
 	
 	//#######################################################################

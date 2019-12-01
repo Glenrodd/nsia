@@ -45,7 +45,7 @@ $('.search-form form').submit(function(){
     </div>
 </div>
 
-<script type="text/javascript">
+<!--<script type="text/javascript">
 
   function wabrirSAD(usuario,id_seguimiento,area_sad,ip){
 
@@ -53,7 +53,7 @@ $('.search-form form').submit(function(){
    }
    
 
-</script>
+</script>-->
 
 
 <div class="search-form" style="display:none">

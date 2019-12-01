@@ -1,4 +1,4 @@
-<head>
+<!-- <head>
 
 <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/jquery.treeview.css" />
   <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.cookie.js"></script>
@@ -10,7 +10,7 @@
  
 
 
-</head>
+</head> -->
 <?php
 /* @var $this SeguimientosController */
 /* @var $model Seguimientos */
@@ -35,11 +35,11 @@ $nuri=strtoupper($nuri);
 
 
 <?php //echo "-----> ".$nuri ?>
-<center>
+<!-- <center>
 <a class="btn btn-app btn-sm" href="index.php?r=seguimientos/printBusquedaIndex&nuri=<?=$nuri?>" target="_blank" style="color:white; background-color:#086A87; ">
     <i class="fa fa-print"></i>Imprimir Seguimiento
 </a>
-</center>
+</center> -->
 <h3><strong>Detalle de seguimiento </strong></h3>
 
 
@@ -63,11 +63,13 @@ $nuri=strtoupper($nuri);
               <!-- /.card-header -->
               <div class="card-body">
       <div class="row">
-        
+        <br><br><br><br><br><br>
        <?php 
        // codigo para verificar si el nuri esta registrado 
        // en la base de datos Postgres nueva
        // en caso de existir nos muestra el valor de la nueva base de datos
+
+      // echo "-->".Seguimientos::countNuriHojasRuta($nuri);
        if (Seguimientos::countNuriHojasRuta($nuri)>0) {
           $row=Seguimientos::getCabeceraSeguimiento($nuri);
           $tipo_documento=$row['tipo_doc'];
@@ -83,8 +85,10 @@ $nuri=strtoupper($nuri);
           $bandera_remitente=0;
           
 
+       }else{
+         $tipo_documento=0;
        }
-       else{
+/*       else{
 
           $row=Seguimientos::getCabeceraSeguimientoMYSQL($nuri);
           $tipo_documento=$row['tipo_documento'];
@@ -100,10 +104,10 @@ $nuri=strtoupper($nuri);
           $bandera_remitente=0;
 
           if ($tipo_documento=='CARTA EXTERNA') {
-            //$remitente=1;
+            $remitente=1;
           }
 
-       }
+       }*/
 
 
 
@@ -150,7 +154,7 @@ $nuri=strtoupper($nuri);
                       <?php  } // fin foreach
 
                        }
-                       else{
+                       /*else{
                           //$row=Seguimientos::getCabeceraSeguimientoMYSQL($nuri);
                           $dataReader=Seguimientos::getNurisAsociadosMYSQL($nuri);
                           $i=0;
@@ -170,7 +174,7 @@ $nuri=strtoupper($nuri);
                           </div><!-- tooltip3 tooltip-effect-1-->  
                           <br>
                         <?php  } // fin foreach
-                        }
+                        }*/
                        ?> 
 
 
@@ -255,42 +259,7 @@ $nuri=strtoupper($nuri);
                         }//if($tipo_documento=='CARTA EXTERNA') {
                   } //else{
                   ?>
-                  <!--############## CODIGO PARA MSTRAR SI EL NURI PERTENECE A UN AGRUPADO DEL SIACO-->
-
-                  <?php if (Seguimientos::getListaNurisAgrupadosSegundarioSIACOCount($nuri)>0) { 
-                        $nuri_principal_mysql=Seguimientos::getNuriPrincipalMysql($nuri);
-                  ?>
-                  <tr>
-                    <th><i  class="fa fa-group"></i> Agrupaci&oacute;n</th>
-                    <td colspan="3" style="color:darkred;">Una copia de este documento pertenece al NUR/NURI Principal 
-
-                      <div class="tooltip3 tooltip-effect-1">
-                        <div class="tooltip-item">
-                          
-                           <b><a href="index.php?r=seguimientos/busquedaIndex&nuri=<?=$nuri_principal_mysql?>"><?=$nuri_principal_mysql?></a></b>
-                          <?php 
-                           /*echo CHtml::ajaxLink($nuri_principal,
-                              $this->createUrl('seguimientos/busquedaNuriPrincipal', array("nuri"=>$nuri_principal)),
-                            array(
-                                'success'=>'function(r){$("#juiDialog3").html(r).dialog("open"); return false;}',
-                            ),
-                            array(
-                                    'id'=>'showJuiDialog3', 
-                                    'style'=>'font-size:20px; ',
-                                  ) // not very useful, but hey...
-                            );*/
-                          ?>
-                        </div>
-                        <div class="tooltip-content clearfix" style="padding-left: 12px;">
-                          <div class="tooltip-text"> Usted puede ver el seguimiento del NUR/NURI Principal seleccionando este enlace  </div>
-                         </div>
-                        </div><!-- tooltip3 tooltip-effect-1-->
-                      </td>  
-                    </tr>
-
-                    <?php 
-                    }
-                  ?>
+                  
 
 
                   <!--############## CODIGO PARA MSTRAR SI EL NURI PERTENECE A UN AGRUPADO DEL SAC-->
@@ -352,13 +321,14 @@ $nuri=strtoupper($nuri);
              } 
              else{ 
 
-              if (Seguimientos::getListaNurisAgrupadossSIACOCount($nuri)) {
+              $principal=''; 
+            /*  if (Seguimientos::getListaNurisAgrupadossSIACOCount($nuri)) {
                 $principal=' PRINCIPAL';
               }
               else{
 
               $principal=''; 
-            }
+            }*/
 
             }
              ?>
@@ -369,7 +339,7 @@ $nuri=strtoupper($nuri);
 
 
                     <?php 
-                     if (Seguimientos::getListaNurisAgrupadossSIACOCount($nuri)) {
+                    /* if (Seguimientos::getListaNurisAgrupadossSIACOCount($nuri)) {
                           $dataReader2=Seguimientos::getListaNurisAgrupadossSIACO($nuri); 
                            ?> 
                            <?php foreach ($dataReader2 as $row3) {  ?>
@@ -379,21 +349,12 @@ $nuri=strtoupper($nuri);
 
                                 <?php 
                            
-                          /* echo CHtml::ajaxLink($row3['nur_s'],
-                              $this->createUrl('seguimientos/busquedaNuriPrincipal', array("nuri"=>$row3['nur_s'])),
-                            array(
-                                'success'=>'function(r){$("#juiDialog3").html(r).dialog("open"); return false;}',
-                            ),
-                            array(
-                                    'id'=>'showJuiDialog3', 
-                                    //'style'=>'font-size:20px; ',
-                                  ) // not very useful, but hey...
-                            ); */
+                        
                           ?>
 
                           <?php  }
 
-                        }
+                        } */
 
                            ?>
 
@@ -529,102 +490,11 @@ function addClassroom()
 		            	<th>ESTADO</th>
 		            	<th>ADJUNTOS</th>
                 </tr>
-                  <!-- 
-                  //#########################################################  
-                  //codigo para mostrar el historico del nuri
-                  // codigo para mostrar informaicon de la base de datios mysql
-                  // siaco -->
-                  <?php
-                  $dataReader=Seguimientos::getSeguimientoMYSQL($nuri,2);
-                  $i=0;
-                  foreach($dataReader as $row) {
-                    $i++;
-                ?>
-              <tr>
-                <td rowspan="2">
-                  <i  class="fa fa-paw" style="font-size: 21px;"></i>
-                  <?=$row['nombre_origen']?>
-                </td> 
-                  <td rowspan="2">
-                    <i  class="fa fa-paw" style="font-size: 21px;"></i>
-                    <?=$row['nombre_destinatario']?>
-                  </td>
-                  <td>
-                    <?=Yii::app()->dateFormatter->format("dd/MM/y",strtotime($row['fecha_derivacion']))?>
-                    <?=$row['hora_derivacion']?>
-                  </td>
-                  <td>
-                    <?=Yii::app()->dateFormatter->format("dd/MM/y",strtotime($row['fecha_recepcion']))?>
-                    <?=$row['hora_recepcion']?>    
-                  </td>
-                  <td><?=$row['accion_seguimiento']?></td>
-                  <td> 
-                    <?php
-                      
-                      if ($row['estado']==100) {
-
-                        echo CHtml::ajaxLink('<i class="fa fa-archive"></i>'.$row['estado_seguimiento'],
-                              $this->createUrl('Seguimientos/viewDetalleArchivo', array("id"=>$row['id_seguimiento'])),
-                            array(
-                                'success'=>'function(r){$("#juiDialog3").html(r).dialog("open"); return false;}'
-                            ),
-                            array('id'=>'showJuiDialog2'.$i, 'style'=>'color:#0174DF; font-weight: bold;') // not very useful, but hey...
-                            ); echo "<br>";
-                      }
-                      else{
-                        echo $row['estado_seguimiento'];
-                      }
-
-                    ?>
-                  </td>
+                  
 
 
 
-                  <td align="center">
-                    <?php
-                    
-                    $adjuntos=$row['adjuntos'];
-                    if ($adjuntos!='') {
 
-                    $row_adjunto=explode(',', $adjuntos);
-
-                    $l=0;
-
-                    for ($l=0; $l <count($row_adjunto) ; $l++) { 
-                      
-                        
-                    //echo CHtml::ajaxLink($row['adjuntos'],
-                              //$this->createUrl('Seguimientos/viewDocumentSeguimiento', array("id"=>$adjuntos)),
-                    $num=rand(11111111,99999999);  
-                    echo CHtml::ajaxLink($row_adjunto[$l],
-                              $this->createUrl('Seguimientos/viewDocumentSeguimiento', array("id"=>$row_adjunto[$l])),
-                            array(
-                                'success'=>'function(r){$("#juiDialog3").html(r).dialog("open"); return false;}'
-                            ),
-                            array('id'=>'showJuiDialog00'.$num, 'name'=>'showJuiDialog00'.$num, 'style'=>'color:#0174DF; font-weight: bold;') // not very useful, but hey...
-                            ); echo "<br>";
-                    }//for ($i=0; $i <count($row_adjunto) ; $i++) { 
-
-                    
-                    
-                    }//if ($adjuntos!='') {
-
-                    ?>
-
-
-                  </td>
-              </tr>
-              <tr>
-               <td colspan="5" style="background-color:#E0ECF8; "><b><u>PROVE&Iacute;DO:</u> </b><?=$row['proveido']?></td>
-              </tr>
-              <!-- -->
-              <?php 
-          
-                  } //foreach($dataReader as $row) {
-                ?>
-                <!-- aqui finaliza el codigo extraido de la base MYSQL -->
-                <!-- ############################################################### -->
-                <tr><td colspan="7" bgcolor="#BDBDBD"></td></tr>
                 
                 <?php
 			            $dataReader=Seguimientos::getSearchNuri($nuri,1);
@@ -786,88 +656,15 @@ $this->endWidget();
 						            	<th>ADJUNTOS</th>
 						            </tr>
 
-                  <!-- 
-                  //#########################################################  
-                  //codigo para mostrar el historico del nuri
-                  // codigo para mostrar informaicon de la base de datios mysql
-                  // siaco -->
-                  <?php 
-
-                        $dataReader=Seguimientos::getSeguimientoMYSQL($nuri,0);
-                        $j=0;
-                        foreach($dataReader as $row) {
-                          $j++;
-                          //$total_contrato=$total_contrato+$row['total_contrato'];
-                      ?>  
-                         <tr>
-                          <td rowspan="2">
-                            
-                            <?=$row['nombre_origen']?>
-                          </td> 
-                            <td rowspan="2">
-                              
-                              <?=$row['nombre_destinatario']?>
-                            </td>
-                            <td>
-                              <?=Yii::app()->dateFormatter->format("dd/MM/y",strtotime($row['fecha_derivacion']))?>
-                              <?=$row['hora_derivacion']?>
-                            </td>
-                            <td>
-                              <?=Yii::app()->dateFormatter->format("dd/MM/y",strtotime($row['fecha_recepcion']))?>
-                              <?=$row['hora_recepcion']?>         
-                            </td>
-                            <td><?=$row['accion_seguimiento']?></td>
-                            <td> 
-                            <?php
-                              
-                              if ($row['estado']==51) {
-
-                                echo CHtml::ajaxLink('<i class="fa fa-archive"></i> '.$row['estado_seguimiento'],
-                                      $this->createUrl('Seguimientos/viewDetalleArchivo', array("id"=>$row['id_seguimiento'])),
-                                    array(
-                                        'success'=>'function(r){$("#juiDialog3").html(r).dialog("open"); return false;}'
-                                    ),
-                                    array('id'=>'showJuiDialog3'.$j, 'style'=>'color:#0174DF; font-weight: bold;') // not very useful, but hey...
-                                    ); echo "<br>";
-                              }
-                              else{
-                                echo $row['estado_seguimiento'];
-                              }
-
-                            ?>
-                          </td>
-                            <td align="center">
-                              <?php
-                              
-                              $adjuntos=$row['adjuntos'];
-                              if ($adjuntos!='') {
-                                  
-                              echo CHtml::ajaxLink($row['adjuntos'],
-                                        $this->createUrl('Seguimientos/viewDocumentSeguimiento', array("id"=>$adjuntos)),
-                                      array(
-                                          'success'=>'function(r){$("#juiDialog3").html(r).dialog("open"); return false;}'
-                                      ),
-                                      array('id'=>'showJuiDialog000000'.$j, 'style'=>'color:#0174DF; font-weight: bold;') // not very useful, but hey...
-                                      ); echo "<br>";
-                                }  
-
-                              ?>
+            
 
 
-                            </td>
-                        </tr>
-                        <tr>
-                          <td colspan="5"><b><u>PROVE&Iacute;DO:</u> </b><?=$row['proveido']?></td>
 
-                        </tr>
-                      <?php 
-                  
-                          } //foreach($dataReader as $row) {
-                        ?>
 
-                  <!-- aqui finaliza el codigo extraido de la base MYSQL -->
-                  <!-- ###################################################### -->
-                    <tr><td colspan="7" bgcolor="#BDBDBD"></td></tr>
+
+
+
+
 
 						          <?php 
                         $i=0;

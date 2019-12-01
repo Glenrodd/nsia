@@ -212,9 +212,9 @@ return array(
 		'dbsad' => array(
 
 			 'class'=>'CDbConnection',
-		     'connectionString' => 'pgsql:host=192.168.131.141;port=5432;dbname=nsiaco',
-			 'username' => 'carla',
-			 'password' => 'carla123',
+		     'connectionString' => 'pgsql:host=192.168.131.135;port=5432;dbname=nsiaco',
+			 'username' => 'postgres',
+			 'password' => 'S1stemas',
 			 'charset' => 'utf8',
 		),
 

@@ -13,9 +13,10 @@ return array(
 	*/
 
 
-	 'connectionString' => 'pgsql:host=192.168.131.141;port=5432;dbname=nsiaco',
-     'username' => 'carla',
-	 'password' => 'carla123',
+	 //'connectionString' => 'pgsql:host=192.168.131.135;port=5432;dbname=nsiaco',
+	 'connectionString' => 'pgsql:host=127.0.0.1;port=5432;dbname=siaco',
+     'username' => 'postgres',
+	 'password' => 'S1stemas2019',
      'charset' => 'utf8',
 
 

@@ -612,6 +612,7 @@ class Seguimientos extends CActiveRecord
 
 		$usuarios=Usuarios::model()->findByPk($id);
 
+		//return $usuarios->nombre;
 		return "".$usuarios->nombre."<br><i style='font-size:11px; color:#0B2F3A;'><b>".$usuarios->fkArea->area."</b></i>";
 	}
 
@@ -1217,14 +1218,14 @@ class Seguimientos extends CActiveRecord
 
 
         $count = HojasRuta::model()->count( 
-    		'nur=:nur AND nro=:nro AND proceso=:proceso AND oficial=:oficial AND activo=:activo AND fecha_registro>=:fecha_registro', 
+    		'nur=:nur AND nro=:nro AND proceso=:proceso AND oficial=:oficial AND activo=:activo', 
     		array(
     				'nur'=>$nuri,
 		            'nro'=>0,
 		            'proceso'=>4,
-		            'oficial'=>1,
+		            'oficial'=>0,
 		            'activo'=>1,
-		            'fecha_registro'=>'2019-02-04',
+		            
     			)
 		);
 
@@ -1511,6 +1512,19 @@ class Seguimientos extends CActiveRecord
         ");
         $dataReader=$command->query();
 	    return $dataReader;
+	}
+
+	public function getMaxIdSeguimiento(){
+
+		$connection= Yii::app()->db;
+                                        
+
+        $row=$connection->createCommand("
+        	SELECT max(s.id_seguimiento) maximo 
+        	FROM seguimientos s
+			")->query()->read();
+			$valor=$row['maximo']+1;
+        return $valor;
 	}
 
 // CODIGO PARA OBTENER LOS PENDIENTES MENORES A 10 DIAS
@@ -2368,7 +2382,7 @@ class Seguimientos extends CActiveRecord
 
 	public function	getReferenciaSintesis($nuri,$proveido){
 
-		$connection_mysql= Yii::app()->dbmysql;
+		//$connection_mysql= Yii::app()->dbmysql;
 		$connection_postgres= Yii::app()->db;
 
 
@@ -2378,35 +2392,8 @@ class Seguimientos extends CActiveRecord
 		<?php
 
 
-		$row_count=$connection_mysql->createCommand("SELECT count(nur) as total FROM hojas_ruta WHERE nur='$nuri' ")->query()->read();
-
-		if ($row_count['total']>0) {
-
-			$row_mysql=$connection_mysql->createCommand("SELECT d.referencia, d.sintesis, d.tipo_documento 
-														 FROM hojas_ruta h, documentos d
-														 WHERE h.nur='$nuri' AND h.nro=-1 AND h.estado=70 AND h.codigo=d.codigo 
-														 ORDER BY h.fecha ASC
-														")->query()->read();
-			$referencia=$row_mysql['referencia'];
-			?>	
-				<tr>
-					<td width="15%"><b>Referencia: </b></td><td style="font-size:8.5pt; border-bottom:1px solid darkgray;"><?=$referencia?></td>
-				</tr>
-				<tr>
-					<td  width="15%"><b>Prove&iacute;do: </b></td><td style="font-size:8.5pt; border-bottom:1px solid darkgray;"><?=$proveido?></td>
-				</tr>
-			<?php
-			if ($row_mysql['tipo_documento']=='CARTA EXTERNA'&& $row_mysql['sintesis']!="") {
-				$sintesis=$row_mysql['sintesis'];
-				?>
-				<tr>
-				<td width="15%"><b>Sintesis: </b></td><td style="font-size:8.5pt;"><?=$sintesis?></td>
-				</tr>
-				<?php
-			}
-
-		}
-		else{
+		
+		
 
 			$row_post=$connection_postgres->createCommand("SELECT d.referencia, d.contenido, d.fk_tipo_documento 
 														 FROM hojas_ruta h, documentos d
@@ -2439,7 +2426,7 @@ class Seguimientos extends CActiveRecord
 			}
 
 
-		} // fin else
+		 // fin else
 
 		?>
 		</table>
@@ -2548,7 +2535,7 @@ class Seguimientos extends CActiveRecord
 	//#######################################################################
 
 	// funcion para consultar la base de datos POSTGRESQL - SAD
-	public function getInfoArchivo($id_seguimiento){
+	/*public function getInfoArchivo($id_seguimiento){
 
 		//$connection=Yii::app()->dbsad;
 	    $connection= Yii::app()->dbsad;
@@ -2563,7 +2550,7 @@ class Seguimientos extends CActiveRecord
 	 	return $row;
 
         
-	}
+	}*/
 
 	
 	//#######################################################################

@@ -128,8 +128,8 @@
 					 <label>
 					<?php echo $form->labelEx($model,'Area SAD (opcional)'); ?>
 					</label>
-					<?php //echo $form->textField($model,'fk_nivel',array('class'=>'form-control')); ?>
-					<?php echo $form->dropDownList($model,'area_sad', Usuarios::getAreasSAD(), array('empty'=>'Seleccione Área SAD','class'=>'form-control  select')); ?>
+					<?php echo $form->textField($model,'area_sad',array('class'=>'form-control')); ?>
+					<?php //echo $form->dropDownList($model,'area_sad', Usuarios::getAreasSAD(), array('empty'=>'Seleccione Área SAD','class'=>'form-control  select')); ?>
 					<?php echo $form->error($model,'area_sad'); ?>
                   </div>
 

@@ -223,7 +223,7 @@ class SeguimientosController extends Controller
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex()
+	public function actionIndex($nuri)
 	{
 		$dataProvider=new CActiveDataProvider('Seguimientos');
 		$this->render('index',array(
@@ -234,14 +234,16 @@ class SeguimientosController extends Controller
 	public function actionBusquedaIndex($nuri)
 	{
 		$dataProvider=new CActiveDataProvider('Seguimientos');
-		$this->render('index',array(
+		/*$this->render('index',array(
 			'dataProvider'=>$dataProvider,
-		));
-		$nuri=trim($nuri);
+		));*/
 
+		$nuri=trim($nuri);
 		$this->render('busquedaIndex',array(
+			'dataprovider'=>$dataProvider,
 			'nuri'=>$nuri,
 		));
+
 	}
 
 
@@ -772,6 +774,10 @@ class SeguimientosController extends Controller
 			$model->correlativo_copia=$correlativo_copia;
 			$model->observado=0;
 			$model->accion_archivo='null';
+
+			$id_seguim=Seguimientos::getMaxIdSeguimiento();
+
+			$model->id_seguimiento=$id_seguim;
 
 			
 			if($model->save()){
@@ -1369,6 +1375,9 @@ class SeguimientosController extends Controller
 	{
 
 		$model=$this->loadModel($id_seguimiento);
+
+		//echo "--------->".$model->oficial;
+		//exit();
 
 		if ($model->oficial==1) {
 				$model->fk_estado=1;
